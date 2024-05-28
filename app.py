@@ -3,6 +3,7 @@ import os
 import views
 from lastfm import update_lastfm_status
 from slack import app
+from views import generate_home_view
 
 
 @app.message("hello")
@@ -14,7 +15,14 @@ def greetings(message, say):
 @app.event("app_home_opened")
 def update_home_tab(client, event, logger):
     try:
-        client.views_publish(user_id=event["user"], view=views.HOME)
+        user_data = db_client.slickstats.users.find_one({"user_id": event["user"]})
+        client.views_publish(
+            user_id=event["user"],
+            view=generate_home_view(
+                user_data.get("lastfm_username", None),
+                user_data.get("lastfm_api_key", None)
+            )
+        )
     except Exception as e:
         logger.error(f"Error publishing home tab: {e}")
 

@@ -12,7 +12,6 @@ db_client = MongoClient(os.environ.get("MONGO_URI"), server_api=ServerApi('1'))
 
 
 def update_user_settings(user_id, data):
-    print(f'Adding user {user_id} to the database')
     db_client.slickstats.users.update_one({"user_id": user_id}, {"$set": data}, upsert=True)
     update_cache()
 
@@ -32,4 +31,3 @@ def update_cache():
 
     with open("cache.json", "w") as f:
         json.dump(data, f)
-        print("Cache updated")
