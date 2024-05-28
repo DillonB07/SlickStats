@@ -14,8 +14,8 @@ def get_playing(api_key: str, username: str) -> dict:
     return response.json()
 
 
-def update_lastfm_status() -> str | bool:
-    threading.Timer(10, update_lastfm_status).start()
+def update_lastfm_status() -> bool:
+    threading.Timer(25, update_lastfm_status).start()
     with open("cache.json", "r") as f:
         data = json.load(f)
     for user in data:
@@ -29,6 +29,9 @@ def update_lastfm_status() -> str | bool:
         if current.get("@attr") and current.get("@attr").get("nowplaying"):
             update_status(
                 ":musical_note:",
-                f"{current.get('name')} - {current.get('artist')['#text']}"
+                f"{current.get('name')} - {current.get('artist')['#text']}",
             )
-
+            return True
+        else:
+            update_status("", "")
+            return True
