@@ -13,8 +13,8 @@ USER_ID = "U054VC2KM9P"
 
 def update_status(emoji, status, expiry=0):
     current_status = app.client.users_profile_get(user=USER_ID)
-    if response.get("ok"):
-        status_emoji = response["profile"].get("status_emoji", ":ghost:")
+    if current_status.get("ok"):
+        status_emoji = current_status["profile"].get("status_emoji", ":ghost:")
     else:
         status_emoji = ":ghost:"
 
