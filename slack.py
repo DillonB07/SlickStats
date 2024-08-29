@@ -18,7 +18,7 @@ def update_status(emoji, status, expiry=0):
     else:
         status_emoji = ":ghost:"
 
-    if status_emoji in list(EMOJIS.values()):
+    if status_emoji in list(EMOJIS.values()) or status_emoji == "":
         app.client.users_profile_set(
             token=app.user_token,
             profile={
