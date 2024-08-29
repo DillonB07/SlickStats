@@ -28,7 +28,7 @@ def update_lastfm_status() -> bool:
         current = playing.get("recenttracks").get("track")[0]
         if current.get("@attr") and current.get("@attr").get("nowplaying"):
             update_status(
-                ":musical_note:",
+                "music",
                 f"{current.get('name')} - {current.get('artist')['#text']}",
             )
             update_pfp("music")
