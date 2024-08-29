@@ -10,7 +10,7 @@ EMOJIS = {
 }
 
 USER_ID = "U054VC2KM9P"
-CURRENT_PFP = "normal"
+current_pfp = "normal"
 
 def update_status(emoji, status, expiry=0):
     current_status = app.client.users_profile_get(user=USER_ID)
@@ -31,9 +31,10 @@ def update_status(emoji, status, expiry=0):
 
 
 def update_pfp(type):
+    global current_pfp
     path = f'pfps/{type}.png'
-    if type != CURRENT_PFP:
-        CURRENT_PFP = type
+    if type != current_pfp:
+        current_pfp = type
         app.client.users_setPhoto(
             token=app.user_token,
             image=open(path, 'rb')
