@@ -15,3 +15,10 @@ def update_status(emoji, status, expiry=0):
             "status_expiration": expiry
         }
     )
+
+def update_pfp(type):
+    path = f'pfps/{type}.png'
+    app.client.users_setPhoto(
+        token=app.user_token,
+        image=open(path, 'rb')
+    )

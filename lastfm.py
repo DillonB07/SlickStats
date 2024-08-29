@@ -3,7 +3,7 @@ import threading
 import requests
 import json
 
-from slack import update_status
+from slack import update_status, update_pfp
 
 BASE_URL = "http://ws.audioscrobbler.com/2.0/"
 
@@ -31,7 +31,9 @@ def update_lastfm_status() -> bool:
                 ":musical_note:",
                 f"{current.get('name')} - {current.get('artist')['#text']}",
             )
+            update_pfp("music")
             return True
         else:
             update_status("", "")
+            update_pfp("normal")
             return True
