@@ -6,8 +6,7 @@ app = App(token=os.environ.get("SLACK_BOT_TOKEN"), signing_secret=os.environ.get
 app.user_token = os.environ.get("SLACK_USER_TOKEN")
 
 EMOJIS = {
-    "music": ":musical_note:",
-    "gaming": ":video_game:",
+    "music": ":musical_note:"
 }
 
 USER_ID = "U054VC2KM9P"
@@ -20,7 +19,7 @@ def update_status(emoji, status, expiry=0):
     else:
         status_emoji = ":ghost:"
 
-    if status_emoji == '' or (emoji in EMOJIS and list(EMOJIS.values()).index(EMOJIS[emoji]) > list(EMOJIS.values()).index(status_emoji)):
+    if status_emoji in list(EMOJIS.values()) or status_emoji == "":
         app.client.users_profile_set(
             token=app.user_token,
             profile={

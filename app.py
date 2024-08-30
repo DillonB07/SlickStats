@@ -1,6 +1,5 @@
 from db import db_client, update_user_settings, update_cache
 import os
-from steam import update_steam_status
 import views
 from lastfm import update_lastfm_status
 from slack import app
@@ -21,9 +20,7 @@ def update_home_tab(client, event, logger):
             user_id=event["user"],
             view=generate_home_view(
                 user_data.get("lastfm_username", None),
-                user_data.get("lastfm_api_key", None),
-                user_data.get("steam_id", None),
-                user_data.get("steam_api_key", None)
+                user_data.get("lastfm_api_key", None)
             )
         )
     except Exception as e:
@@ -34,7 +31,7 @@ def update_home_tab(client, event, logger):
 def submit_settings(ack, body, logger):
     ack()
     api_key = ""
-    settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"]
+    settings = ["lastfm_username", "lastfm_api_key"]
     data = {}
     for block in body["view"]["state"]["values"].values():
         for setting in settings:
@@ -53,5 +50,4 @@ if __name__ == '__main__':
     print("Connected to MongoDB")
     update_cache()
     update_lastfm_status()
-    update_steam_status()
     app.start(port=int(os.environ.get("PORT", 3000)))
