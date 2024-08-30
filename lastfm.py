@@ -25,7 +25,7 @@ def update_lastfm_status() -> bool:
             return False
 
         playing = get_playing(api_key, username)
-        current = playing.get("recenttracks").get("track")[0]
+        current = playing.get("recenttracks", {}).get("track")[0]
         if current.get("@attr") and current.get("@attr").get("nowplaying"):
             update_status(
                 "music",

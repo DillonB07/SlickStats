@@ -1,4 +1,4 @@
-def generate_home_view(lastfm_username: str, lastfm_api_key: str) -> dict:
+def generate_home_view(lastfm_username: str, lastfm_api_key: str, steam_id: str, steam_api_key: str) -> dict:
     return {
         "type": "home",
         "blocks": [
@@ -35,6 +35,32 @@ def generate_home_view(lastfm_username: str, lastfm_api_key: str) -> dict:
                 "label": {
                     "type": "plain_text",
                     "text": "Last.fm API Key",
+                    "emoji": False
+                }
+            },{
+                "type": "divider"
+            },{
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "steam_id",
+                    "initial_value": steam_id if steam_id else ""
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Steam ID",
+                    "emoji": False
+                }
+            },{
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "steam_api_key",
+                    "initial_value": steam_api_key if steam_api_key else ""
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Steam API Key",
                     "emoji": False
                 }
             },
