@@ -31,11 +31,12 @@ def update_status(emoji, status, expiry=0):
 
 
 def update_pfp(type):
-    global current_pfp
-    path = f'pfps/{type}.png'
-    if type != current_pfp:
-        current_pfp = type
-        app.client.users_setPhoto(
-            token=app.user_token,
-            image=open(path, 'rb')
-        )
+    # global current_pfp
+    # path = f'pfps/{type}.png'
+    # if type != current_pfp:
+    #     current_pfp = type
+    #     app.client.users_setPhoto(
+    #         token=app.user_token,
+    #         image=open(path, 'rb')
+    #     )
+    return
