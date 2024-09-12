@@ -3,3 +3,4 @@ python-dotenv==1.0.1
 requests==2.32.2
 slack-bolt==1.18.1
 slack_sdk==3.27.2
+Flask==3.0.3

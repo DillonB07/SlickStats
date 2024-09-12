@@ -14,26 +14,28 @@ def get_playing(api_key: str, username: str) -> dict:
     return response.json()
 
 
-def update_lastfm_status() -> bool:
+def update_lastfm_status():
     threading.Timer(25, update_lastfm_status).start()
     with open("cache.json", "r") as f:
         data = json.load(f)
     for user in data:
         api_key = user.get("lastfm_api_key")
         username = user.get("lastfm_username")
-        if not api_key or not username:
-            return False
+        user_token = user.get("user_token")
+        if not api_key or not username or not user_token:
+            return
 
         playing = get_playing(api_key, username)
-        current = playing.get("recenttracks").get("track")[0]
+        current = playing.get("recenttracks", {}).get("track")[0]
         if current.get("@attr") and current.get("@attr").get("nowplaying"):
             update_status(
                 "music",
                 f"{current.get('name')} - {current.get('artist')['#text']}",
+                user_token,
             )
-            update_pfp("music")
-            return True
+            update_pfp("music", user_token)
+            return
         else:
-            update_status("", "")
-            update_pfp("normal")
+            update_status("", "", user_token)
+            update_pfp("normal", user_token)
             return True
