@@ -15,11 +15,11 @@ current_pfp = "normal"
 def update_status(emoji, status, expiry=0):
     current_status = app.client.users_profile_get(user=USER_ID)
     if current_status.get("ok"):
-        status_emoji = current_status["profile"].get("status_emoji", ":ghost:")
+        status_emoji = current_status["profile"].get("status_emoji", "")
     else:
-        status_emoji = ":ghost:"
+        status_emoji = ""
 
-    if status_emoji in list(EMOJIS.values()) or status_emoji == ":ghost:":
+    if status_emoji in list(EMOJIS.values()) or status_emoji == "":
         app.client.users_profile_set(
             token=app.user_token,
             profile={
