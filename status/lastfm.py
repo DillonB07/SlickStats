@@ -13,7 +13,7 @@ def get_playing(api_key: str, username: str) -> dict:
     return response.json()
 
 
-def get_lastfm_status(user) -> str | None:
+def get_lastfm_status(user) -> tuple[str | None, str | None]:
     global current_song
     api_key = user.get("lastfm_api_key")
     username = user.get("lastfm_username")

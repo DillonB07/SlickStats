@@ -10,7 +10,8 @@ def update_status():
     user = get_user_settings(os.environ.get("SLACK_USER_ID"))
     for status in STATUSES:
         custom, log_message = status.get("function", lambda _: print('Failed to run status fetching function for {status.get("name")}'))(user)
-        log_to_slack(log_message)
+        if log_message:
+            log_to_slack(log_message)
 
         if custom:
             # print(f"Setting pfp and status for {status.get("name")} to {status.get("status","").replace("(custom)", custom)} with {status.get("pfp")} pfp.")
