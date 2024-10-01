@@ -11,6 +11,7 @@ def get_playing(api_key: str, user_id: str) -> dict:
 
 
 def get_steam_status(user) -> str | None:
+    global current_game
     api_key = user.get("steam_api_key")
     user_id = user.get("steam_id")
     if not api_key or not user_id:
