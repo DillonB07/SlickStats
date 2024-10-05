@@ -8,11 +8,13 @@ import os
 
 load_dotenv()
 
-db_client = MongoClient(os.environ.get("MONGO_URI"), server_api=ServerApi('1'))
+db_client = MongoClient(os.environ.get("MONGO_URI"), server_api=ServerApi("1"))
 
 
 def update_user_settings(user_id, data):
-    db_client.slickstats.users.update_one({"user_id": user_id}, {"$set": data}, upsert=True)
+    db_client.slickstats.users.update_one(
+        {"user_id": user_id}, {"$set": data}, upsert=True
+    )
     update_cache()
 
 

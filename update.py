@@ -4,6 +4,7 @@ from slack import update_slack_pfp, update_slack_status, STATUSES, log_to_slack
 
 import os
 
+
 def update_status():
     threading.Timer(25, update_status).start()
     set = False
@@ -15,7 +16,11 @@ def update_status():
 
         if custom:
             # print(f"Setting pfp and status for {status.get("name")} to {status.get("status","").replace("(custom)", custom)} with {status.get("pfp")} pfp.")
-            update_slack_status(status.get("emoji"), status.get("status","").replace("(custom)", custom), os.environ.get("SLACK_USER_ID"))
+            update_slack_status(
+                status.get("emoji"),
+                status.get("status", "").replace("(custom)", custom),
+                os.environ.get("SLACK_USER_ID"),
+            )
             update_slack_pfp(status.get("pfp"))
             set = True
             break

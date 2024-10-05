@@ -10,21 +10,24 @@ STATUSES = [
         "emoji": ":video_game:",
         "status": "Playing (custom) via Steam",
         "pfp": "gaming",
-        "function": get_steam_status
+        "function": get_steam_status,
     },
     {
         "name": "Last.fm",
         "emoji": ":musical_note:",
         "status": "(custom)",
         "pfp": "music",
-        "function": get_lastfm_status
-    }
+        "function": get_lastfm_status,
+    },
 ]
-app = App(token=os.environ.get("SLACK_BOT_TOKEN"), signing_secret=os.environ.get(
-    "SLACK_SIGNING_SECRET"))
+app = App(
+    token=os.environ.get("SLACK_BOT_TOKEN"),
+    signing_secret=os.environ.get("SLACK_SIGNING_SECRET"),
+)
 app.user_token = os.environ.get("SLACK_USER_TOKEN")
 
 current_pfp = "normal"
+
 
 def update_slack_status(emoji, status, user_id, expiry=0):
     current_status = app.client.users_profile_get(user=user_id)
@@ -41,20 +44,17 @@ def update_slack_status(emoji, status, user_id, expiry=0):
             profile={
                 "status_text": status,
                 "status_emoji": emoji,
-                "status_expiration": expiry
-            }
+                "status_expiration": expiry,
+            },
         )
 
 
 def update_slack_pfp(type):
     global current_pfp
-    path = f'pfps/{type}.png'
+    path = f"pfps/{type}.png"
     if type != current_pfp:
         current_pfp = type
-        app.client.users_setPhoto(
-            token=app.user_token,
-            image=open(path, 'rb')
-        )
+        app.client.users_setPhoto(token=app.user_token, image=open(path, "rb"))
     return
 
 
