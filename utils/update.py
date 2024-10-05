@@ -1,6 +1,6 @@
 import threading
-from db import get_user_settings
-from slack import update_slack_pfp, update_slack_status, STATUSES, log_to_slack
+from utils.db import get_user_settings
+from utils.slack import update_slack_pfp, update_slack_status, STATUSES, log_to_slack
 
 import os
 

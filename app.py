@@ -1,8 +1,8 @@
-from db import db_client, update_user_settings, update_cache
+from utils.db import db_client, update_user_settings
 import os
-from update import update_status
-from slack import app
-from views import generate_home_view
+from utils.update import update_status
+from utils.slack import app
+from utils.views import generate_home_view
 
 
 @app.message("hello")
@@ -33,14 +33,12 @@ def update_home_tab(client, event, logger):
 @app.action("submit_settings")
 def submit_settings(ack, body, logger):
     ack()
-    api_key = ""
     settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"]
     data = {}
     for block in body["view"]["state"]["values"].values():
         for setting in settings:
             if setting in block:
                 data[setting] = block[setting]["value"]
-                api_key = block[setting]["value"]
 
     update_user_settings(body["user"]["id"], data)
 
