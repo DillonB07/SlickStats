@@ -10,7 +10,12 @@ def update_status():
     set = False
     user = get_user_settings(os.environ.get("SLACK_USER_ID"))
     for status in STATUSES:
-        custom, log_message = status.get("function", lambda _: print('Failed to run status fetching function for {status.get("name")}'))(user)
+        custom, log_message = status.get(
+            "function",
+            lambda _: print(
+                'Failed to run status fetching function for {status.get("name")}'
+            ),
+        )(user)
         if log_message:
             log_to_slack(log_message)
 

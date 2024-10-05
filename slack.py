@@ -60,6 +60,5 @@ def update_slack_pfp(type):
 
 def log_to_slack(message):
     app.client.chat_postMessage(
-        channel=os.environ.get("SLACK_LOG_CHANNEL"),
-        text=message
+        channel=os.environ.get("SLACK_LOG_CHANNEL"), text=message
     )

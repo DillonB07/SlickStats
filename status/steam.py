@@ -4,6 +4,7 @@ BASE_URL = "https://api.steampowered.com"
 
 current_game = ""
 
+
 def get_playing(api_key: str, user_id: str) -> dict:
     url = f"{BASE_URL}/ISteamUser/GetPlayerSummaries/v2/?key={api_key}&format=json&steamids={user_id}"
     response = requests.get(url)

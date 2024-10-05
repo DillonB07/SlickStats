@@ -4,6 +4,7 @@ BASE_URL = "http://ws.audioscrobbler.com/2.0/"
 
 current_song = ""
 
+
 def get_playing(api_key: str, username: str) -> dict:
     url = f"{BASE_URL}?method=user.getrecenttracks&api_key={api_key}&format=json&user={username}"
     response = requests.get(url)
