@@ -13,6 +13,7 @@ def update_status():
     for user in users:
         token = user.get("user_token")
         user_id = user.get("user_id")
+        current_pfp = user.get("pfp")
         for status in STATUSES:
             custom, log_message = status.get(
                 "function",
@@ -30,10 +31,10 @@ def update_status():
                     user_id=user_id,
                     token=token,
                 )
-                update_slack_pfp(type=status.get("pfp"), user_id=user_id, token=token)
+                update_slack_pfp(type=status.get("pfp"), current_pfp=current_pfp, user_id=user_id, token=token)
                 set = True
                 break
 
         if not set:
             update_slack_status(emoji="", status="", user_id=user_id, token=token)
-            update_slack_pfp(type="normal", user_id=user_id, token=token)
+            update_slack_pfp(type="normal", current_pfp=current_pfp, user_id=user_id, token=token)

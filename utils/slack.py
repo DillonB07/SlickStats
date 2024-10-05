@@ -36,8 +36,6 @@ app = App(
     oauth_settings=oauth_settings
 )
 
-current_pfp = "normal"
-
 
 def update_slack_status(emoji, status, user_id, token, expiry=0):
     current_status = app.client.users_profile_get(user=user_id)
@@ -60,11 +58,9 @@ def update_slack_status(emoji, status, user_id, token, expiry=0):
         )
 
 
-def update_slack_pfp(type, user_id, token):
-    global current_pfp
+def update_slack_pfp(type, user_id, token, current_pfp):
     path = f"pfps/{type}.png"
     if type != current_pfp:
-        current_pfp = type
         db_client.update_user_settings(user_id, {"pfp": type})
         app.client.users_setPhoto(token=token, image=open(path, "rb"))
     return
