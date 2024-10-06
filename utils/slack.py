@@ -14,14 +14,14 @@ STATUSES = [
         "name": "Steam",
         "emoji": ":video_game:",
         "status": "Playing (custom) via Steam",
-        "pfp": "gaming_url",
+        "pfp": "gaming_pfp",
         "function": get_steam_status,
     },
     {
         "name": "Last.fm",
         "emoji": ":musical_note:",
         "status": "(custom)",
-        "pfp": "music_url",
+        "pfp": "music_pfp",
         "function": get_lastfm_status,
     },
 ]
