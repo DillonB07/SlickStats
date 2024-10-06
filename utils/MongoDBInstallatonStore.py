@@ -22,6 +22,7 @@ class MongoDBInstallationStore(InstallationStore):
         """
 
         :param installation: Installation:
+        :param installation: Installation: 
 
         """
         data = installation.to_dict()
@@ -44,7 +45,7 @@ class MongoDBInstallationStore(InstallationStore):
     ) -> Optional[Bot]:
         """
 
-        :param *:
+        :param *: 
         :param enterprise_id: Optional[str]:  (Default value = None)
         :param team_id: Optional[str]:  (Default value = None)
         :param is_enterprise_install: Optional[bool]:  (Default value = False)
@@ -71,7 +72,7 @@ class MongoDBInstallationStore(InstallationStore):
     ) -> Optional[Installation]:
         """
 
-        :param *:
+        :param *: 
         :param enterprise_id: Optional[str]:  (Default value = None)
         :param team_id: Optional[str]:  (Default value = None)
         :param user_id: Optional[str]:  (Default value = None)
@@ -94,9 +95,9 @@ class MongoDBInstallationStore(InstallationStore):
     ) -> None:
         """
 
-        :param *:
+        :param *: 
         :param enterprise_id: Optional[str]:  (Default value = None)
-        :param team_id: Optional[str]:
+        :param team_id: Optional[str]: 
 
         """
         self.collection.update_one(
@@ -113,7 +114,7 @@ class MongoDBInstallationStore(InstallationStore):
     ) -> None:
         """
 
-        :param *:
+        :param *: 
         :param enterprise_id: Optional[str]:  (Default value = None)
         :param team_id: Optional[str]:  (Default value = None)
         :param user_id: Optional[str]:  (Default value = None)
@@ -128,7 +129,7 @@ class MongoDBInstallationStore(InstallationStore):
     ):
         """
 
-        :param *:
+        :param *: 
         :param enterprise_id: Optional[str]:  (Default value = None)
         :param team_id: Optional[str]:  (Default value = None)
 

@@ -37,11 +37,11 @@ app = App(signing_secret=env.slack_signing_secret, oauth_settings=oauth_settings
 def update_slack_status(emoji, status, user_id, token, expiry=0):
     """
 
-    :param emoji:
-    :param status:
-    :param user_id:
-    :param token:
-    :param expiry:  (Default value = 0)
+    :param emoji: param status:
+    :param user_id: param token:
+    :param expiry: Default value = 0)
+    :param status: 
+    :param token: 
 
     """
     current_status = app.client.users_profile_get(user=user_id, token=token)
@@ -67,10 +67,10 @@ def update_slack_status(emoji, status, user_id, token, expiry=0):
 def update_slack_pfp(type, user_id, current_pfp, token):
     """
 
-    :param type:
-    :param user_id:
-    :param current_pfp:
-    :param token:
+    :param type: param user_id:
+    :param current_pfp: param token:
+    :param user_id: 
+    :param token: 
 
     """
     path = f"pfps/{type}.png"
@@ -83,8 +83,8 @@ def update_slack_pfp(type, user_id, current_pfp, token):
 def log_to_slack(message, token):
     """
 
-    :param message:
-    :param token:
+    :param message: param token:
+    :param token: 
 
     """
     app.client.chat_postMessage(

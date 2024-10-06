@@ -10,6 +10,10 @@ def generate_home_view(
     :param lastfm_api_key: str | None:
     :param steam_id: str | None:
     :param steam_api_key: str | None:
+    :param lastfm_username: str | None: 
+    :param lastfm_api_key: str | None: 
+    :param steam_id: str | None: 
+    :param steam_api_key: str | None: 
 
     """
     if (
