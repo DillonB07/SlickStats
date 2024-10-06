@@ -130,6 +130,7 @@ class MongoDBInstallationStore(InstallationStore):
         else:
             query = {"enterprise_id": enterprise_id}
         self.collection.delete_one(query)
+        self.mongo_client["slickstats"].users.delete_one({"user_id": user_id})
 
     def find_installations(
         self, *, enterprise_id: Optional[str] = None, team_id: Optional[str] = None
