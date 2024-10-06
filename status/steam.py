@@ -11,6 +11,8 @@ def get_playing(api_key: str, user_id: str) -> dict:
 
 
 def get_steam_status(user) -> tuple[None | str, None | str]:
+    if not user:
+        return None, None
     api_key = user.get("steam_api_key")
     user_id = user.get("steam_id")
     if not api_key or not user_id:
@@ -26,4 +28,3 @@ def get_steam_status(user) -> tuple[None | str, None | str]:
         update_user_settings(user.get("user_id"), {"current_game": current_game})
         log_message = f"Steam: <https://steamcommunity.com/profiles/{user_id}|{username}> is playing {current}"
         return current, log_message
-    return current, None

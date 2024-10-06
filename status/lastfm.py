@@ -22,6 +22,8 @@ def get_lastfm_status(user) -> tuple[str | None, str | None]:
     :param user:
 
     """
+    if not user:
+        return None, None
     api_key = user.get("lastfm_api_key")
     username = user.get("lastfm_username")
     if not api_key or not username:
