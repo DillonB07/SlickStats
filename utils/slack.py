@@ -76,7 +76,7 @@ def update_slack_pfp(type, user_id, current_pfp, token, img_url):
     :param token:
 
     """
-    if type != current_pfp:
+    if type != current_pfp and img_url:
         update_user_settings(user_id, {"pfp": type})
         res = requests.get(img_url)
         if res.status_code != 200 or 'image' not in res.headers['Content-Type']:
