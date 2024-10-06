@@ -1,6 +1,7 @@
 from slack_sdk import WebClient
 
-from utils.db import get_user_settings, update_user_settings
+from utils.db import get_user_settings
+from utils.db import update_user_settings
 from utils.env import env
 from utils.slack import app
 from utils.update import update_status
