@@ -1,8 +1,9 @@
+from typing import Optional
+
 from pymongo import MongoClient
 from slack_sdk.oauth import InstallationStore
-from slack_sdk.oauth.installation_store.models.installation import Installation
 from slack_sdk.oauth.installation_store.models.bot import Bot
-from typing import Optional
+from slack_sdk.oauth.installation_store.models.installation import Installation
 
 
 class MongoDBInstallationStore(InstallationStore):

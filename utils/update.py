@@ -1,7 +1,9 @@
 import threading
+
 from utils.db import get_all_users
-from utils.slack import update_slack_pfp, update_slack_status, STATUSES, log_to_slack
 from utils.env import env
+from utils.slack import (STATUSES, log_to_slack, update_slack_pfp,
+                         update_slack_status)
 
 
 def update_status():

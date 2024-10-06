@@ -1,9 +1,10 @@
-from utils.update import update_status
-from utils.slack import app
-from utils.views import generate_home_view
-from utils.env import env
-from utils.db import get_user_settings, update_user_settings
 from slack_sdk import WebClient
+
+from utils.db import get_user_settings, update_user_settings
+from utils.env import env
+from utils.slack import app
+from utils.update import update_status
+from utils.views import generate_home_view
 
 
 @app.event("app_home_opened")

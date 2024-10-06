@@ -6,7 +6,6 @@ from status.steam import get_steam_status
 from utils.db import update_user_settings
 from utils.env import env
 
-
 STATUSES = [
     {
         "name": "Steam",

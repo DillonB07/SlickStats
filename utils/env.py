@@ -1,8 +1,9 @@
+import os
+
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
 from utils.MongoDBInstallatonStore import MongoDBInstallationStore
-import os
 
 load_dotenv()
 
