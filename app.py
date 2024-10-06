@@ -1,20 +1,30 @@
-from utils.update import update_status
-from utils.slack import app
-from utils.views import generate_home_view
-from utils.env import env
-from utils.db import get_user_settings, update_user_settings
 from slack_sdk import WebClient
+
+from utils.db import get_user_settings
+from utils.db import update_user_settings
+from utils.env import env
+from utils.slack import app
+from utils.update import update_status
+from utils.views import generate_home_view
 
 
 @app.event("app_home_opened")
 def update_home_tab(client: WebClient, event, logger):
+    """
+
+    :param client: WebClient:
+    :param event:
+    :param logger:
+
+    """
     try:
         user_data = get_user_settings(user_id=event["user"]) or {
             "user_id": event["user"]
         }
 
         team_id = client.team_info()["team"]["id"]
-        installations = env.installation_store.find_installations(team_id=team_id)
+        installations = env.installation_store.find_installations(
+            team_id=team_id)
         if not installations:
             return
         installation = installations[0]
@@ -35,8 +45,17 @@ def update_home_tab(client: WebClient, event, logger):
 
 @app.action("submit_settings")
 def submit_settings(ack, body, logger):
+    """
+
+    :param ack:
+    :param body:
+    :param logger:
+
+    """
     ack()
-    settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"]
+    settings = [
+        "lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"
+    ]
     data = {}
     for block in body["view"]["state"]["values"].values():
         for setting in settings:

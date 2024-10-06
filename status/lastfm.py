@@ -6,12 +6,23 @@ current_song = ""
 
 
 def get_playing(api_key: str, username: str) -> dict:
+    """
+
+    :param api_key: str:
+    :param username: str:
+
+    """
     url = f"{BASE_URL}?method=user.getrecenttracks&api_key={api_key}&format=json&user={username}"
     response = requests.get(url)
     return response.json()
 
 
 def get_lastfm_status(user) -> tuple[str | None, str | None]:
+    """
+
+    :param user:
+
+    """
     global current_song
     api_key = user.get("lastfm_api_key")
     username = user.get("lastfm_username")

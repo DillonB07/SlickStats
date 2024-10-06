@@ -1,18 +1,22 @@
 import threading
+
 from utils.db import get_all_users
-from utils.slack import update_slack_pfp, update_slack_status, STATUSES, log_to_slack
 from utils.env import env
+from utils.slack import log_to_slack
+from utils.slack import STATUSES
+from utils.slack import update_slack_pfp
+from utils.slack import update_slack_status
 
 
 def update_status():
+    """ """
     threading.Timer(25, update_status).start()
     set = False
     users = get_all_users()
 
     for user in list(users):
         installation = env.installation_store.find_installation(
-            user_id=user.get("user_id")
-        )
+            user_id=user.get("user_id"))
         if not installation:
             print("No installation found for user", user.get("user_id"))
             continue
@@ -47,7 +51,10 @@ def update_status():
                 break
 
         if not set:
-            update_slack_status(emoji="", status="", user_id=user_id, token=user_token)
+            update_slack_status(emoji="",
+                                status="",
+                                user_id=user_id,
+                                token=user_token)
             update_slack_pfp(
                 type="normal",
                 current_pfp=current_pfp,

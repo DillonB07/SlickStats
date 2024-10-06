@@ -4,14 +4,19 @@ def generate_home_view(
     steam_id: str | None,
     steam_api_key: str | None,
 ) -> dict:
-    if (
-        lastfm_api_key is None
-        or lastfm_username is None
-        or steam_id is None
-        or steam_api_key is None
-    ):
+    """
+
+    :param lastfm_username: str | None:
+    :param lastfm_api_key: str | None:
+    :param steam_id: str | None:
+    :param steam_api_key: str | None:
+
+    """
+    if (lastfm_api_key is None or lastfm_username is None or steam_id is None
+            or steam_api_key is None):
         return {
-            "type": "home",
+            "type":
+            "home",
             "blocks": [
                 {
                     "type": "header",
@@ -25,29 +30,33 @@ def generate_home_view(
                     "type": "section",
                     "text": {
                         "type": "plain_text",
-                        "text": "Hi there! I'll be updating your status when you use one of the various services I support. To get started, please click the button below to authorise me to update your status!",
+                        "text":
+                        "Hi there! I'll be updating your status when you use one of the various services I support. To get started, please click the button below to authorise me to update your status!",
                         "emoji": True,
                     },
                 },
                 {
-                    "type": "actions",
-                    "elements": [
-                        {
-                            "type": "button",
-                            "text": {
-                                "type": "plain_text",
-                                "text": ":slack: Authorise",
-                                "emoji": True,
-                            },
-                            "style": "primary",
-                            "url": "https://slickstats.dillonb07.studio/slack/install",
-                        }
-                    ],
+                    "type":
+                    "actions",
+                    "elements": [{
+                        "type":
+                        "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": ":slack: Authorise",
+                            "emoji": True,
+                        },
+                        "style":
+                        "primary",
+                        "url":
+                        "https://slickstats.dillonb07.studio/slack/install",
+                    }],
                 },
             ],
         }
     return {
-        "type": "home",
+        "type":
+        "home",
         "blocks": [
             {
                 "type": "header",
@@ -57,13 +66,16 @@ def generate_home_view(
                     "emoji": True,
                 },
             },
-            {"type": "divider"},
+            {
+                "type": "divider"
+            },
             {
                 "type": "input",
                 "element": {
                     "type": "plain_text_input",
                     "action_id": "lastfm_username",
-                    "initial_value": lastfm_username if lastfm_username else "",
+                    "initial_value":
+                    lastfm_username if lastfm_username else "",
                 },
                 "label": {
                     "type": "plain_text",
@@ -84,7 +96,9 @@ def generate_home_view(
                     "emoji": False,
                 },
             },
-            {"type": "divider"},
+            {
+                "type": "divider"
+            },
             {
                 "type": "input",
                 "element": {
@@ -92,7 +106,11 @@ def generate_home_view(
                     "action_id": "steam_id",
                     "initial_value": steam_id if steam_id else "",
                 },
-                "label": {"type": "plain_text", "text": "Steam ID", "emoji": False},
+                "label": {
+                    "type": "plain_text",
+                    "text": "Steam ID",
+                    "emoji": False
+                },
             },
             {
                 "type": "input",
@@ -108,15 +126,18 @@ def generate_home_view(
                 },
             },
             {
-                "type": "actions",
-                "elements": [
-                    {
-                        "type": "button",
-                        "text": {"type": "plain_text", "text": "Submit", "emoji": True},
-                        "value": "submit_settings",
-                        "action_id": "submit_settings",
-                    }
-                ],
+                "type":
+                "actions",
+                "elements": [{
+                    "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Submit",
+                        "emoji": True
+                    },
+                    "value": "submit_settings",
+                    "action_id": "submit_settings",
+                }],
             },
         ],
     }
