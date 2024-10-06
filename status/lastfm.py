@@ -19,7 +19,10 @@ def get_lastfm_status(user) -> tuple[str | None, str | None]:
         return None, None
 
     playing = get_playing(api_key, username)
-    current = playing.get("recenttracks", {}).get("track")[0]
+    current = playing.get("recenttracks", {}).get("track", [])
+    if not current:
+        return None, None
+    current = current[0]
     if current.get("@attr") and current.get("@attr").get("nowplaying"):
         new = f"{current.get('name')} - {current.get('artist')['#text']}"
         if current_song == new:

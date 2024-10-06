@@ -1,6 +1,51 @@
 def generate_home_view(
-    lastfm_username: str, lastfm_api_key: str, steam_id: str, steam_api_key: str
+    lastfm_username: str | None,
+    lastfm_api_key: str | None,
+    steam_id: str | None,
+    steam_api_key: str | None,
 ) -> dict:
+    if (
+        lastfm_api_key is None
+        or lastfm_username is None
+        or steam_id is None
+        or steam_api_key is None
+    ):
+        return {
+            "type": "home",
+            "blocks": [
+                {
+                    "type": "header",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Welcome to Slick Stats",
+                        "emoji": True,
+                    },
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Hi there! I'll be updating your status when you use one of the various services I support. To get started, please click the button below to authorise me to update your status!",
+                        "emoji": True,
+                    },
+                },
+                {
+                    "type": "actions",
+                    "elements": [
+                        {
+                            "type": "button",
+                            "text": {
+                                "type": "plain_text",
+                                "text": ":slack: Authorise",
+                                "emoji": True,
+                            },
+                            "style": "primary",
+                            "url": "https://slickstats.dillonb07.studio/slack/install",
+                        }
+                    ],
+                },
+            ],
+        }
     return {
         "type": "home",
         "blocks": [

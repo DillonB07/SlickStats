@@ -1,21 +1,27 @@
-from utils.db import db_client
 from utils.update import update_status
 from utils.slack import app
 from utils.views import generate_home_view
 from utils.env import env
+from utils.db import get_user_settings, update_user_settings
+from slack_sdk import WebClient
 
 
 @app.event("app_home_opened")
-def update_home_tab(client, event, logger):
-    print(event["user"])
+def update_home_tab(client: WebClient, event, logger):
     try:
-        user_data = (
-            db_client.find_user(user_id=event["user"]) or {"user_id": event["user"]}
-        )
-        print(user_data)
+        user_data = get_user_settings(user_id=event["user"]) or {
+            "user_id": event["user"]
+        }
+
+        team_id = client.team_info()["team"]["id"]
+        installations = env.installation_store.find_installations(team_id=team_id)
+        if not installations:
+            return
+        installation = installations[0]
+        token = installation.bot_token
         client.views_publish(
             user_id=event["user"],
-            token=user_data.get("user_token"),
+            token=token,
             view=generate_home_view(
                 user_data.get("lastfm_username", None),
                 user_data.get("lastfm_api_key", None),
@@ -37,11 +43,12 @@ def submit_settings(ack, body, logger):
             if setting in block:
                 data[setting] = block[setting]["value"]
 
-    db_client.update_user_settings(body["user"]["id"], data)
+    update_user_settings(body["user"]["id"], data)
 
 
 if __name__ == "__main__":
-    db_client.ping()
+    env.mongo_client.admin.command("ping")
     print("Connected to MongoDB")
     update_status()
+    print(f"App is running on port {env.port}")
     app.start(port=env.port)
