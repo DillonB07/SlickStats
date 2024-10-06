@@ -5,7 +5,7 @@ def update_user_settings(user_id, data):
     """
 
     :param user_id: param data:
-    :param data: 
+    :param data:
 
     """
     client = env.mongo_client
@@ -25,7 +25,7 @@ def get_all_users():
 def get_user_settings(user_id):
     """
 
-    :param user_id: 
+    :param user_id:
 
     """
     client = env.mongo_client

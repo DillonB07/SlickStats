@@ -14,8 +14,8 @@ def update_home_tab(client: WebClient, event, logger):
 
     :param client: WebClient:
     :param event: param logger:
-    :param client: WebClient: 
-    :param logger: 
+    :param client: WebClient:
+    :param logger:
 
     """
     try:
@@ -48,8 +48,8 @@ def submit_settings(ack, body, logger):
     """
 
     :param ack: param body:
-    :param logger: 
-    :param body: 
+    :param logger:
+    :param body:
 
     """
     ack()
