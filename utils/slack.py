@@ -28,10 +28,14 @@ oauth_settings = OAuthSettings(
     client_secret=env.slack_client_secret,
     installation_store=env.installation_store,
     user_scopes=["users.profile:read", "users.profile:write", "users:read"],
-    scopes=["chat:write", "im:history", "users.profile:read", "commands", "team:read"],
+    scopes=[
+        "chat:write", "im:history", "users.profile:read", "commands",
+        "team:read"
+    ],
 )
 
-app = App(signing_secret=env.slack_signing_secret, oauth_settings=oauth_settings)
+app = App(signing_secret=env.slack_signing_secret,
+          oauth_settings=oauth_settings)
 
 
 def update_slack_status(emoji, status, user_id, token, expiry=0):
@@ -87,6 +91,6 @@ def log_to_slack(message, token):
     :param token:
 
     """
-    app.client.chat_postMessage(
-        channel=env.slack_log_channel, text=message, token=token
-    )
+    app.client.chat_postMessage(channel=env.slack_log_channel,
+                                text=message,
+                                token=token)

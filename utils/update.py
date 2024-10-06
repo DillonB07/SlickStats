@@ -16,8 +16,7 @@ def update_status():
 
     for user in list(users):
         installation = env.installation_store.find_installation(
-            user_id=user.get("user_id")
-        )
+            user_id=user.get("user_id"))
         if not installation:
             print("No installation found for user", user.get("user_id"))
             continue
@@ -52,7 +51,10 @@ def update_status():
                 break
 
         if not set:
-            update_slack_status(emoji="", status="", user_id=user_id, token=user_token)
+            update_slack_status(emoji="",
+                                status="",
+                                user_id=user_id,
+                                token=user_token)
             update_slack_pfp(
                 type="normal",
                 current_pfp=current_pfp,
