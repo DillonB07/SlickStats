@@ -77,6 +77,10 @@ def generate_home_view(
                 },
             },
             {
+                "type": "context",
+                "elements": [{"type": "mrkdwn", "text": "_Your account username!_"}],
+            },
+            {
                 "type": "input",
                 "element": {
                     "type": "plain_text_input",
@@ -89,6 +93,15 @@ def generate_home_view(
                     "emoji": False,
                 },
             },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Get this from <https://www.last.fm/api/account/create|here>_",
+                    }
+                ],
+            },
             {"type": "divider"},
             {
                 "type": "input",
@@ -98,6 +111,15 @@ def generate_home_view(
                     "initial_value": steam_id if steam_id else "",
                 },
                 "label": {"type": "plain_text", "text": "Steam ID", "emoji": False},
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Put your profile URL into <https://steamdb.info/calculator/|SteamDB> and copy the SteamID field_",
+                    }
+                ],
             },
             {
                 "type": "input",
@@ -113,6 +135,15 @@ def generate_home_view(
                 },
             },
             {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Get this from <https://steamcommunity.com/dev/apikey|here>. You need 2FA on your account_",
+                    }
+                ],
+            },
+            {
                 "type": "actions",
                 "elements": [
                     {
@@ -124,20 +155,29 @@ def generate_home_view(
                 ],
             },
             {
-                    "type": "actions",
-                    "elements": [
-                        {
-                            "type": "button",
-                            "text": {
-                                "type": "plain_text",
-                                "text": ":slack: Re-authorise",
-                                "emoji": True,
-                            },
-                            "style": "primary",
-                            "url": "https://slickstats.dillonb07.studio/slack/install",
-                            "action_id": "authorise-btn",
-                        }
-                    ],
-                },
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Not working? Try re-authorising the app._",
+                    }
+                ],
+            },
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": ":slack: Re-authorise",
+                            "emoji": True,
+                        },
+                        "style": "primary",
+                        "url": "https://slickstats.dillonb07.studio/slack/install",
+                        "action_id": "authorise-btn",
+                    }
+                ],
+            },
         ],
     }

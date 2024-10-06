@@ -5,6 +5,7 @@ from slack_sdk.oauth import InstallationStore
 from slack_sdk.oauth.installation_store.models.bot import Bot
 from slack_sdk.oauth.installation_store.models.installation import Installation
 
+
 class MongoDBInstallationStore(InstallationStore):
     """ """
 
