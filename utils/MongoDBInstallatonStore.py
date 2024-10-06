@@ -123,9 +123,13 @@ class MongoDBInstallationStore(InstallationStore):
         :param user_id: Optional[str]:  (Default value = None)
 
         """
-        self.collection.delete_one(
-            {"enterprise_id": enterprise_id, "team_id": team_id, "user_id": user_id}
-        )
+        if user_id:
+            query = {"user_id": user_id}
+        elif team_id:
+            query = {"team_id": team_id}
+        else:
+            query = {"enterprise_id": enterprise_id}
+        self.collection.delete_one(query)
 
     def find_installations(
         self, *, enterprise_id: Optional[str] = None, team_id: Optional[str] = None
