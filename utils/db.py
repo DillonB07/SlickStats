@@ -1,20 +1,34 @@
-from dotenv import load_dotenv
-from pymongo import MongoClient
-from pymongo.server_api import ServerApi
-
-import os
-
-
-load_dotenv()
-
-db_client = MongoClient(os.environ.get("MONGO_URI"), server_api=ServerApi("1"))
+from utils.env import env
 
 
 def update_user_settings(user_id, data):
-    db_client.slickstats.users.update_one(
-        {"user_id": user_id}, {"$set": data}, upsert=True
-    )
+    """
+
+    :param user_id:
+    :param data:
+
+    """
+    client = env.mongo_client
+    db = client["slickstats"]
+    users = db.users
+    users.update_one({"user_id": user_id}, {"$set": data}, upsert=True)
+
+
+def get_all_users():
+    """ """
+    client = env.mongo_client
+    db = client["slickstats"]
+    users = db.users
+    return users.find()
 
 
 def get_user_settings(user_id):
-    return db_client.slickstats.users.find_one({"user_id": user_id})
+    """
+
+    :param user_id:
+
+    """
+    client = env.mongo_client
+    db = client["slickstats"]
+    users = db.users
+    return users.find_one({"user_id": user_id})
