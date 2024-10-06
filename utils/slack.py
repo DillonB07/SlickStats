@@ -67,28 +67,38 @@ def update_slack_status(emoji, status, user_id, token, expiry=0):
         )
 
 
-def update_slack_pfp(type, user_id, current_pfp, token, img_url):
+def update_slack_pfp(new_pfp_type, user_id, current_pfp, bot_token, token, img_url):
     """
-
-    :param type:
-    :param user_id:
-    :param current_pfp:
-    :param token:
-
+    Update Slack profile picture if the new type is different from the current one and a valid image URL is provided.
+    
+    :param new_pfp_type: The new profile picture type.
+    :param user_id: The Slack user ID.
+    :param current_pfp: The current profile picture type.
+    :param token: The Slack API token.
+    :param img_url: The URL of the new profile picture.
     """
-    if type != current_pfp and img_url:
-        update_user_settings(user_id, {"pfp": type})
-        res = requests.get(img_url)
-        if res.status_code != 200 or 'image' not in res.headers['Content-Type']:
-            # tell user that image is invalid
+    if new_pfp_type != current_pfp and img_url:
+        update_user_settings(user_id, {"pfp": new_pfp_type})
+        try:
+            res = requests.get(img_url)
+            if res.status_code != 200 or 'image' not in res.headers['Content-Type']:
+                # Notify user that the image is invalid
+                app.client.chat_postMessage(
+                    channel=user_id,
+                    text=f"The supplied image URL for {new_pfp_type} appears to be invalid. Please make sure the correct image URL is supplied on my App home.",
+                    token=bot_token
+                )
+                return
+            
+            content = BytesIO(res.content)
+            app.client.users_setPhoto(image=content, token=token)
+        except Exception as e:
+            # Log the exception or notify the user
             app.client.chat_postMessage(
                 channel=user_id,
-                text=f"The supplied image URL for {type} appears to be invalid. Please make sure the correct image URL is supplied on my App home.",
-                token=token,
+                text=f"An error occurred while updating the profile picture: {str(e)}",
+                token=bot_token
             )
-            return
-        content = BytesIO(res.content)
-        app.client.users_setPhoto(token=token, image=content)
     return
 
 

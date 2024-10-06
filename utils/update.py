@@ -43,9 +43,10 @@ def update_status():
                     token=user_token,
                 )
                 update_slack_pfp(
-                    type=status.get("pfp"),
+                    new_pfp_type=status.get("pfp"),
                     current_pfp=current_pfp,
                     user_id=user_id,
+                    bot_token=bot_token,
                     token=user_token,
                     img_url=user.get(status.get("pfp"), None),
                 )
@@ -55,9 +56,10 @@ def update_status():
         if not set or current_pfp is None:
             update_slack_status(emoji="", status="", user_id=user_id, token=user_token)
             update_slack_pfp(
-                type="normal",
+                new_pfp_type="default_pfp",
                 current_pfp=current_pfp,
                 user_id=user_id,
+                bot_token=bot_token,
                 token=user_token,
                 img_url=user.get("default_pfp", None),
             )
