@@ -156,7 +156,7 @@ def generate_home_view(
                 },
                 "label": {
                     "type": "plain_text",
-                    "text": "Musical PFP",
+                    "text": "Default PFP",
                     "emoji": False,
                 },
             },
