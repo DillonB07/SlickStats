@@ -23,7 +23,8 @@ def update_home_tab(client: WebClient, event, logger):
         }
 
         team_id = client.team_info()["team"]["id"]
-        installations = env.installation_store.find_installations(team_id=team_id)
+        installations = env.installation_store.find_installations(
+            team_id=team_id)
         if not installations:
             return
         installation = installations[0]
@@ -52,7 +53,9 @@ def submit_settings(ack, body, logger):
 
     """
     ack()
-    settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"]
+    settings = [
+        "lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"
+    ]
     data = {}
     for block in body["view"]["state"]["values"].values():
         for setting in settings:
