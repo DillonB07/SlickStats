@@ -18,8 +18,11 @@ def get_steam_status(user) -> tuple[None | str, None | str]:
     if not api_key or not user_id:
         return None, None
     playing = get_playing(api_key, user_id)
-    current = playing.get("response", {}).get("players", [])[0].get("gameextrainfo")
-    username = playing.get("response", {}).get("players", [])[0].get("personaname")
+    players = playing.get("response", {}).get("players", [])
+    if not players:
+        return None, None
+    current = players[0].get("gameextrainfo")
+    username = players[0].get("personaname")
     current_game = user.get("current_game")
     if current_game == current:
         return current, None
