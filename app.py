@@ -12,9 +12,9 @@ from utils.views import generate_home_view
 def update_home_tab(client: WebClient, event, logger):
     """
 
-    :param client: WebClient: 
-    :param event: 
-    :param logger: 
+    :param client: WebClient:
+    :param event:
+    :param logger:
 
     """
     try:
@@ -46,9 +46,9 @@ def update_home_tab(client: WebClient, event, logger):
 def submit_settings(ack, body, logger):
     """
 
-    :param ack: 
-    :param body: 
-    :param logger: 
+    :param ack:
+    :param body:
+    :param logger:
 
     """
     ack()
