@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from slack_sdk.oauth import InstallationStore
 from slack_sdk.oauth.installation_store.models.bot import Bot
 from slack_sdk.oauth.installation_store.models.installation import Installation
-
+from utils.db import create_user
 
 class MongoDBInstallationStore(InstallationStore):
     """ """
@@ -34,6 +34,7 @@ class MongoDBInstallationStore(InstallationStore):
             {"$set": data},
             upsert=True,
         )
+        create_user(installation.user_id)
 
     def find_bot(
         self,

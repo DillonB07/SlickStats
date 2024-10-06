@@ -1,5 +1,15 @@
 from utils.env import env
 
+def create_user(user_id):
+    """
+
+    :param user_id:
+
+    """
+    client = env.mongo_client
+    db = client["slickstats"]
+    users = db.users
+    users.insert_one({"user_id": user_id})
 
 def update_user_settings(user_id, data):
     """
