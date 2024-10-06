@@ -151,7 +151,7 @@ def generate_home_view(
                 "type": "input",
                 "element": {
                     "type": "plain_text_input",
-                    "action_id": "music_pfp",
+                    "action_id": "default_pfp",
                     "initial_value": default_pfp if default_pfp else "",
                 },
                 "label": {
