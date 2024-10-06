@@ -123,5 +123,21 @@ def generate_home_view(
                     }
                 ],
             },
+            {
+                    "type": "actions",
+                    "elements": [
+                        {
+                            "type": "button",
+                            "text": {
+                                "type": "plain_text",
+                                "text": ":slack: Re-authorise",
+                                "emoji": True,
+                            },
+                            "style": "primary",
+                            "url": "https://slickstats.dillonb07.studio/slack/install",
+                            "action_id": "authorise-btn",
+                        }
+                    ],
+                },
         ],
     }

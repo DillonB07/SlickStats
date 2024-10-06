@@ -1,13 +1,12 @@
 # Slick Stats
 
-I've not yet implemented OAuth so if you wish to use this app, you need to host it yourself.
-Slick Stats is a Slack bot that will automatically update your Slack status to show what you're up to on a variety of platforms
+Slick Stats is a Slack bot that will automatically update your Slack status to show what you're up to on a variety of platforms. To use it, just visit the app home, authorise and add your credentials!
 
 ## Features
 
 - LastFM Status
-- Steam Status (Coming soon™️) - *this was implemented but it broke stuff so I reverted it*
-
+- Steam Status
+- PFP Switcher (Currently only works for myself, I'll add custom profile pictures soon)
 
 
 ## Setup
@@ -34,14 +33,21 @@ Make a Slack app with the following manifest (make sure to switch out the URLs t
         }
     },
     "oauth_config": {
+        "redirect_urls": [
+            "https://slickstats.dillonb07.studio/slack/oauth_redirect"
+        ],
         "scopes": {
             "user": [
-                "users.profile:write"
+                "users.profile:read",
+                "users.profile:write",
+                "users:read"
             ],
             "bot": [
                 "chat:write",
                 "im:history",
-                "users.profile:read"
+                "users.profile:read",
+                "commands",
+                "team:read"
             ]
         }
     },
@@ -76,11 +82,10 @@ python3.12 app.py
 You will also need the following in a `.env` file:
 
 ```
-SLACK_USER_TOKEN=""
-SLACK_BOT_TOKEN=""
+SLACK_CLIENT_ID=""
+SLACK_CLIENT_SECRET=""
 SLACK_SIGNING_SECRET=""
+SLACK_LOG_CHANNEL=""
 
-MONGO_USER=""
-MONGO_PASSWORD=""
 MONGO_URI=""
 ```
