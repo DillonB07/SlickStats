@@ -36,7 +36,10 @@ def update_home_tab(client: WebClient, event, logger):
                 user_data.get("lastfm_api_key", None),
                 user_data.get("steam_id", None),
                 user_data.get("steam_api_key", None),
-                user_exists=bool(user_data),
+                user_data.get("default_pfp", None),
+                user_data.get("music_pfp", None),
+                user_data.get("gaming_pfp", None),
+                bool(user_data),
             ),
         )
     except Exception as e:
@@ -64,7 +67,7 @@ def submit_settings(ack, body, logger):
 
     """
     ack()
-    settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"]
+    settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key", "default_pfp", "music_pfp", "gaming_pfp"]
     data = {}
     for block in body["view"]["state"]["values"].values():
         for setting in settings:

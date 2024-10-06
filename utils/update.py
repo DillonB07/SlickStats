@@ -47,6 +47,7 @@ def update_status():
                     current_pfp=current_pfp,
                     user_id=user_id,
                     token=user_token,
+                    img_url=user.get(custom, None),
                 )
                 set = True
                 break
@@ -58,4 +59,5 @@ def update_status():
                 current_pfp=current_pfp,
                 user_id=user_id,
                 token=user_token,
+                img_url=user.get("default_pfp", None),
             )

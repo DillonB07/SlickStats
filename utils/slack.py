@@ -1,3 +1,4 @@
+import requests
 from slack_bolt import App
 from slack_bolt.oauth.oauth_settings import OAuthSettings
 
@@ -6,19 +7,21 @@ from status.steam import get_steam_status
 from utils.db import update_user_settings
 from utils.env import env
 
+from io import BytesIO
+
 STATUSES = [
     {
         "name": "Steam",
         "emoji": ":video_game:",
         "status": "Playing (custom) via Steam",
-        "pfp": "gaming",
+        "pfp": "gaming_url",
         "function": get_steam_status,
     },
     {
         "name": "Last.fm",
         "emoji": ":musical_note:",
         "status": "(custom)",
-        "pfp": "music",
+        "pfp": "music_url",
         "function": get_lastfm_status,
     },
 ]
@@ -64,7 +67,7 @@ def update_slack_status(emoji, status, user_id, token, expiry=0):
         )
 
 
-def update_slack_pfp(type, user_id, current_pfp, token):
+def update_slack_pfp(type, user_id, current_pfp, token, img_url):
     """
 
     :param type:
@@ -73,12 +76,19 @@ def update_slack_pfp(type, user_id, current_pfp, token):
     :param token:
 
     """
-    if user_id != "U054VC2KM9P":
-        return
-    path = f"pfps/{type}.png"
     if type != current_pfp:
         update_user_settings(user_id, {"pfp": type})
-        app.client.users_setPhoto(image=open(path, "rb"), token=token)
+        res = requests.get(img_url)
+        if res.status_code != 200 or 'image' not in res.headers['Content-Type']:
+            # tell user that image is invalid
+            app.client.chat_postMessage(
+                channel=user_id,
+                text=f"The supplied image URL for {type} appears to be invalid. Please make sure the correct image URL is supplied on my App home.",
+                token=token,
+            )
+            return
+        content = BytesIO(res.content)
+        app.client.users_setPhoto(token=token, image=content)
     return
 
 

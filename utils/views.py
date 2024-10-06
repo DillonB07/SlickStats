@@ -3,6 +3,9 @@ def generate_home_view(
     lastfm_api_key: str | None,
     steam_id: str | None,
     steam_api_key: str | None,
+    default_pfp: str | None,
+    music_pfp: str | None,
+    gaming_pfp: str | None,
     user_exists: bool,
 ) -> dict:
     """
@@ -143,6 +146,73 @@ def generate_home_view(
                     }
                 ],
             },
+            {"type": "divider"},
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "music_pfp",
+                    "initial_value": default_pfp if default_pfp else "",
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Musical PFP",
+                    "emoji": False,
+                },
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Set this to your normal PFP_",
+                    }
+                ],
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "music_pfp",
+                    "initial_value": music_pfp if music_pfp else "",
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Musical PFP",
+                    "emoji": False,
+                },
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Set this to an image URL if you want your PFP to change when listening to music_",
+                    }
+                ],
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "gaming_pfp",
+                    "initial_value": gaming_pfp if gaming_pfp else "",
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Gaming PFP",
+                    "emoji": False,
+                },
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Set this to an image URL if you want your PFP to change when playing a game_",
+                    }
+                ],
+            },
             {
                 "type": "actions",
                 "elements": [
@@ -154,6 +224,7 @@ def generate_home_view(
                     }
                 ],
             },
+            {"type": "divider"},
             {
                 "type": "context",
                 "elements": [
