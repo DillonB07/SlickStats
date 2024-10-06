@@ -44,8 +44,6 @@ def update_slack_status(emoji, status, user_id, token, expiry=0):
     :param expiry:  (Default value = 0)
 
     """
-    if user_id != "U054VC2KM9P":
-        return
     current_status = app.client.users_profile_get(user=user_id, token=token)
     if current_status.get("ok"):
         status_emoji = current_status["profile"].get("status_emoji", "")
@@ -75,6 +73,8 @@ def update_slack_pfp(type, user_id, current_pfp, token):
     :param token:
 
     """
+    if user_id != "U054VC2KM9P":
+        return
     path = f"pfps/{type}.png"
     if type != current_pfp:
         update_user_settings(user_id, {"pfp": type})
