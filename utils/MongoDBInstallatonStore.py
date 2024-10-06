@@ -7,6 +7,7 @@ from slack_sdk.oauth.installation_store.models.installation import Installation
 
 
 class MongoDBInstallationStore(InstallationStore):
+    """ """
     def __init__(
         self,
         mongo_client: MongoClient,
@@ -17,6 +18,11 @@ class MongoDBInstallationStore(InstallationStore):
         self.collection = self.db[collection_name]
 
     def save(self, installation: Installation):
+        """
+
+        :param installation: Installation: 
+
+        """
         data = installation.to_dict()
         self.collection.update_one(
             {
@@ -35,6 +41,14 @@ class MongoDBInstallationStore(InstallationStore):
         team_id: Optional[str] = None,
         is_enterprise_install: Optional[bool] = False
     ) -> Optional[Bot]:
+        """
+
+        :param *: 
+        :param enterprise_id: Optional[str]:  (Default value = None)
+        :param team_id: Optional[str]:  (Default value = None)
+        :param is_enterprise_install: Optional[bool]:  (Default value = False)
+
+        """
         record = self.collection.find_one(
             {
                 "enterprise_id": enterprise_id,
@@ -54,6 +68,15 @@ class MongoDBInstallationStore(InstallationStore):
         user_id: Optional[str] = None,
         is_enterprise_install: Optional[bool] = False
     ) -> Optional[Installation]:
+        """
+
+        :param *: 
+        :param enterprise_id: Optional[str]:  (Default value = None)
+        :param team_id: Optional[str]:  (Default value = None)
+        :param user_id: Optional[str]:  (Default value = None)
+        :param is_enterprise_install: Optional[bool]:  (Default value = False)
+
+        """
         if user_id:
             record = self.collection.find_one({"user_id": user_id})
         elif team_id:
@@ -68,6 +91,13 @@ class MongoDBInstallationStore(InstallationStore):
     def delete_bot(
         self, *, enterprise_id: Optional[str] = None, team_id: Optional[str]
     ) -> None:
+        """
+
+        :param *: 
+        :param enterprise_id: Optional[str]:  (Default value = None)
+        :param team_id: Optional[str]: 
+
+        """
         self.collection.update_one(
             {"enterprise_id": enterprise_id, "team_id": team_id},
             {"$unset": {"bot": ""}},
@@ -80,6 +110,14 @@ class MongoDBInstallationStore(InstallationStore):
         team_id: Optional[str] = None,
         user_id: Optional[str] = None
     ) -> None:
+        """
+
+        :param *: 
+        :param enterprise_id: Optional[str]:  (Default value = None)
+        :param team_id: Optional[str]:  (Default value = None)
+        :param user_id: Optional[str]:  (Default value = None)
+
+        """
         self.collection.delete_one(
             {"enterprise_id": enterprise_id, "team_id": team_id, "user_id": user_id}
         )
@@ -87,6 +125,13 @@ class MongoDBInstallationStore(InstallationStore):
     def find_installations(
         self, *, enterprise_id: Optional[str] = None, team_id: Optional[str] = None
     ):
+        """
+
+        :param *: 
+        :param enterprise_id: Optional[str]:  (Default value = None)
+        :param team_id: Optional[str]:  (Default value = None)
+
+        """
         query = {}
         if enterprise_id:
             query["enterprise_id"] = enterprise_id

@@ -2,6 +2,12 @@ from utils.env import env
 
 
 def update_user_settings(user_id, data):
+    """
+
+    :param user_id: 
+    :param data: 
+
+    """
     client = env.mongo_client
     db = client["slickstats"]
     users = db.users
@@ -9,6 +15,7 @@ def update_user_settings(user_id, data):
 
 
 def get_all_users():
+    """ """
     client = env.mongo_client
     db = client["slickstats"]
     users = db.users
@@ -16,6 +23,11 @@ def get_all_users():
 
 
 def get_user_settings(user_id):
+    """
+
+    :param user_id: 
+
+    """
     client = env.mongo_client
     db = client["slickstats"]
     users = db.users

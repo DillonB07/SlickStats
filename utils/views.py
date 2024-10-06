@@ -4,6 +4,14 @@ def generate_home_view(
     steam_id: str | None,
     steam_api_key: str | None,
 ) -> dict:
+    """
+
+    :param lastfm_username: str | None: 
+    :param lastfm_api_key: str | None: 
+    :param steam_id: str | None: 
+    :param steam_api_key: str | None: 
+
+    """
     if (
         lastfm_api_key is None
         or lastfm_username is None

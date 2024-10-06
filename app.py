@@ -9,6 +9,13 @@ from utils.views import generate_home_view
 
 @app.event("app_home_opened")
 def update_home_tab(client: WebClient, event, logger):
+    """
+
+    :param client: WebClient: 
+    :param event: 
+    :param logger: 
+
+    """
     try:
         user_data = get_user_settings(user_id=event["user"]) or {
             "user_id": event["user"]
@@ -36,6 +43,13 @@ def update_home_tab(client: WebClient, event, logger):
 
 @app.action("submit_settings")
 def submit_settings(ack, body, logger):
+    """
+
+    :param ack: 
+    :param body: 
+    :param logger: 
+
+    """
     ack()
     settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key"]
     data = {}

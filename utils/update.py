@@ -7,6 +7,7 @@ from utils.slack import (STATUSES, log_to_slack, update_slack_pfp,
 
 
 def update_status():
+    """ """
     threading.Timer(25, update_status).start()
     set = False
     users = get_all_users()

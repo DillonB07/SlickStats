@@ -9,6 +9,7 @@ load_dotenv()
 
 
 class Environment:
+    """ """
     def __init__(self):
         self.slack_client_id = os.environ.get("SLACK_CLIENT_ID", "unset")
         self.slack_client_secret = os.environ.get("SLACK_CLIENT_SECRET", "unset")
