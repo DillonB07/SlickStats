@@ -37,7 +37,11 @@ class MongoDBInstallationStore(InstallationStore):
         )
         db = self.mongo_client["slickstats"]
         users = db.users
-        users.insert_one({"user_id": installation.user_id})
+        users.update_one(
+            {"user_id": installation.user_id},
+            {"$set": {"user_id": installation.user_id}},
+            upsert=True
+        )
 
     def find_bot(
         self,
