@@ -3,6 +3,7 @@ def generate_home_view(
     lastfm_api_key: str | None,
     steam_id: str | None,
     steam_api_key: str | None,
+    user_exists: bool,
 ) -> dict:
     """
 
@@ -12,12 +13,7 @@ def generate_home_view(
     :param steam_api_key: str | None:
 
     """
-    if (
-        lastfm_api_key is None
-        or lastfm_username is None
-        or steam_id is None
-        or steam_api_key is None
-    ):
+    if not user_exists:
         return {
             "type": "home",
             "blocks": [

@@ -36,6 +36,7 @@ def update_home_tab(client: WebClient, event, logger):
                 user_data.get("lastfm_api_key", None),
                 user_data.get("steam_id", None),
                 user_data.get("steam_api_key", None),
+                user_exists=bool(user_data),
             ),
         )
     except Exception as e:
