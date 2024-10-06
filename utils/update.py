@@ -11,10 +11,10 @@ from utils.slack import update_slack_status
 def update_status():
     """ """
     threading.Timer(25, update_status).start()
-    set = False
     users = get_all_users()
 
     for user in list(users):
+        set = False
         installation = env.installation_store.find_installation(
             user_id=user.get("user_id")
         )
@@ -51,7 +51,7 @@ def update_status():
                 set = True
                 break
 
-        if not set:
+        if not set or current_pfp is None:
             update_slack_status(emoji="", status="", user_id=user_id, token=user_token)
             update_slack_pfp(
                 type="normal",
