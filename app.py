@@ -41,6 +41,15 @@ def update_home_tab(client: WebClient, event, logger):
     except Exception as e:
         logger.error(f"Error publishing home tab: {e}")
 
+@app.action("authorise-btn")
+def authorise_btn(ack):
+    """
+
+    :param ack:
+
+    """
+    ack()
+    return
 
 @app.action("submit_settings")
 def submit_settings(ack, body, logger):

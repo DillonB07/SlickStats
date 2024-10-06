@@ -49,6 +49,7 @@ def generate_home_view(
                             },
                             "style": "primary",
                             "url": "https://slickstats.dillonb07.studio/slack/install",
+                            "action_id": "authorise-btn",
                         }
                     ],
                 },
