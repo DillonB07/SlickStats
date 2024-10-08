@@ -57,7 +57,6 @@ def update_slack_status(emoji, status, user_id, token, expiry=0):
 
     if status_emoji in emojis or status_emoji == "":
         current_status_text = current_status["profile"].get("status_text", "")
-        print(current_status_text)
         if current_status_text == status:
             return
         app.client.users_profile_set(
