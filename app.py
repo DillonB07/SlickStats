@@ -71,8 +71,7 @@ def submit_settings(ack, body, logger):
 
 
 @app.event("user_huddle_changed")
-def huddle_changed(event, client):
-    print('fired')
+def huddle_changed(event):
     in_huddle = event.get("user", {}).get("profile", {}).get("huddle_state", None)
     user = get_user_settings(user_id=event["user"]["id"])
     if not user: return

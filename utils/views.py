@@ -243,6 +243,7 @@ def generate_home_view(
                         "type": "button",
                         "text": {"type": "plain_text", "text": "Submit", "emoji": True},
                         "value": "submit_settings",
+                        "style": "primary",
                         "action_id": "submit_settings",
                     }
                 ],
@@ -267,7 +268,7 @@ def generate_home_view(
                             "text": ":slack: Re-authorise",
                             "emoji": True,
                         },
-                        "style": "primary",
+                        "style": "danger",
                         "url": "https://slickstats.dillonb07.studio/slack/install",
                         "action_id": "authorise-btn",
                     }
