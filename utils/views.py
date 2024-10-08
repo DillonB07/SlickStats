@@ -5,6 +5,7 @@ def generate_home_view(
     steam_api_key: str | None,
     default_pfp: str | None,
     music_pfp: str | None,
+    huddle_pfp: str | None,
     gaming_pfp: str | None,
     user_exists: bool,
 ) -> dict:
@@ -188,6 +189,28 @@ def generate_home_view(
                     {
                         "type": "mrkdwn",
                         "text": "_Set this to an image URL if you want your PFP to change when listening to music_",
+                    }
+                ],
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "huddle_pfp",
+                    "initial_value": huddle_pfp if huddle_pfp else "",
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Huddle PFP",
+                    "emoji": False,
+                },
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Set this to an image URL if you want your PFP to change when you're in a Slack huddle_",
                     }
                 ],
             },
