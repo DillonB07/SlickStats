@@ -35,9 +35,13 @@ def update_home_tab(client: WebClient, event, logger):
                 lastfm_api_key=user_data.get("lastfm_api_key", None),
                 steam_id=user_data.get("steam_id", None),
                 steam_api_key=user_data.get("steam_api_key", None),
+                jellyfin_url=user_data.get("jellyfin_url", None),
+                jellyfin_api_key=user_data.get("jellyfin_api_key", None),
+                jellyfin_username=user_data.get("jellyfin_username", None),
                 default_pfp=user_data.get("default_pfp", None),
                 huddle_pfp=user_data.get("huddle_pfp", None),
                 music_pfp=user_data.get("music_pfp", None),
+                film_pfp=user_data.get("film_pfp", None),
                 gaming_pfp=user_data.get("gaming_pfp", None),
                 user_exists=bool(user_data),
             ),
@@ -58,9 +62,9 @@ def authorise_btn(ack):
 
 
 @app.action("submit_settings")
-def submit_settings(ack, body, logger):
+def submit_settings(ack, body):
     ack()
-    settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key", "default_pfp", "huddle_pfp", "music_pfp", "gaming_pfp"]
+    settings = ["lastfm_username", "lastfm_api_key", "steam_id", "steam_api_key", "jellyfin_url", "jellyfin_api_key", "jellyfin_username", "default_pfp", "huddle_pfp", "music_pfp", "film_pfp", "gaming_pfp"]
     data = {}
     for block in body["view"]["state"]["values"].values():
         for setting in settings:

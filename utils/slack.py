@@ -2,6 +2,7 @@ import requests
 from slack_bolt import App
 from slack_bolt.oauth.oauth_settings import OAuthSettings
 
+from status.jellyfin import get_jellyfin_status
 from status.lastfm import get_lastfm_status
 from status.steam import get_steam_status
 from utils.db import update_user_settings
@@ -16,6 +17,13 @@ STATUSES = [
         "status": "Playing (custom) via Steam",
         "pfp": "gaming_pfp",
         "function": get_steam_status,
+    },
+    {
+        "name": "Jellyfin",
+        "emoji": ":tv:",
+        "status": "Watching (custom)",
+        "pfp": "film _pfp",
+        "function": get_jellyfin_status,
     },
     {
         "name": "Last.fm",
