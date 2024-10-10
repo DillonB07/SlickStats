@@ -22,7 +22,7 @@ STATUSES = [
         "name": "Jellyfin",
         "emoji": ":tv:",
         "status": "Watching (custom)",
-        "pfp": "film _pfp",
+        "pfp": "film_pfp",
         "function": get_jellyfin_status,
     },
     {
